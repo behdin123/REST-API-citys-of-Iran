@@ -75,7 +75,7 @@ router.get("/:id", (request, response) => {
 });
 
 
-// Read specific city - get by Name 
+// Read specific city - get by any property 
 // This is not longer Case Sensitive because of ($options:'i')
 router.get("/:field/:value", (request, response) => {   
     
