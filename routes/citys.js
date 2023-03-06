@@ -50,22 +50,6 @@ router.get("/", (req, response) => {
 });
 
 
-// Read specific city - get by Id
-router.get("/:id", (request, response) => {
-    city.findById(request.params.id)
-    .then(data => { response.send(mapData(data)); })
-    .catch(err => { response.status(500).send( {message: err.message }); })
-});
-
-// Read specific city - get by Name 
-// Ops: (this is Case Sensitive so search the name with big letter in the beggining)
-router.get("/name/:name", (request, response) => {
-    city.find({name: {$regex: request.params.name}})
-    .then(data => { response.send(mapArray(data)); })
-    .catch(err => { response.status(500).send( {message: err.message }); })
-});
-
-
 // Read Random city 
 router.get("/random", (request, response) => {
     city.countDocuments({})
@@ -79,6 +63,29 @@ router.get("/random", (request, response) => {
         .catch(err => {
             response.status(500).send({message: err.message});
         })
+    })
+});
+
+
+// Read specific city - get by Id
+router.get("/:id", (request, response) => {
+    city.findById(request.params.id)
+    .then(data => { response.send(mapData(data)); })
+    .catch(err => { response.status(500).send( {message: err.message }); })
+});
+
+
+// Read specific city - get by Name 
+// This is not longer Case Sensitive because of ($options:'i')
+router.get("/:field/:value", (request, response) => {   
+    
+    const field = request.params.field;
+    const value = request.params.value;
+    
+    city.find({ [field]: { $regex: request.params.value, $options:'i' } })
+    .then (data => { response.send(data) })  
+    .catch (err => { 
+        response.status(500).send( { message: err.message } )
     })
 });
 
