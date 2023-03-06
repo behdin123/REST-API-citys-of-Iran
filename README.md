@@ -1,6 +1,6 @@
-<h3 align="center">git init</h3>
+<h3 align="center">REST-API made with Express</h3>
 
-<h3 align="left">Connect with me:</h3>
+<h3 align="left">This is a REST-API made with Express and gives a overview of the biggest citys in Iran</h3>
 <p align="left">
 </p>
 
